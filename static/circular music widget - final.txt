@@ -1,0 +1,1778 @@
+HTML:
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Circular Player Style 1 (Original - Enhanced) -->
+  <div id="widgetContainer" class="circular1">
+    <div class="circlePlayerContainer">
+      <div class="circleAlbumWrap">
+        <img id="albumArt" src="" alt="Album Art" />
+        <div class="progressRing">
+          <svg viewBox="0 0 100 100">
+            <circle class="progressBg" cx="50" cy="50" r="45" />
+            <circle id="progressCircle" class="progressFg" cx="50" cy="50" r="45" />
+          </svg>
+        </div>
+        <div id="playPauseButton" class="circlePlayButton">
+          <svg id="playPauseIcon" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+          </svg>
+        </div>
+      </div>
+      <div class="circleInfoSection">
+        <div class="songInfo" id="songInfo">
+          <span class="song">Loading song...</span>
+          <span class="artist">Loading Artist</span>
+        </div>
+        <div id="timeStamps">
+          <span id="currentTime">0:00</span>
+          <span id="totalTime">0:00</span>
+        </div>
+        <div class="circleControls">
+          <div id="prevButton">
+            <svg viewBox="0 0 24 24">
+              <path fill="currentColor" d="M11 12L24 3v18zM0 3h4v18H0z" />
+            </svg>
+          </div>
+          <div id="nextButton">
+            <svg viewBox="0 0 24 24">
+              <path fill="currentColor" d="M13 12L0 3v18zM24 3h-4v18h4z" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Circular Player Style 2 (Compact Version) -->
+  <div id="widgetContainer" class="circular2">
+    <div class="circlePlayerContainer">
+      <div class="compactLayout">
+        <div class="circleAlbumWrap">
+          <img id="albumArt" src="" alt="Album Art" />
+          <div class="progressRing">
+            <svg viewBox="0 0 100 100">
+              <circle class="progressBg" cx="50" cy="50" r="45" />
+              <circle id="progressCircle" class="progressFg" cx="50" cy="50" r="45" />
+            </svg>
+          </div>
+          <div id="playPauseButton" class="circlePlayButton">
+            <svg id="playPauseIcon" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+            </svg>
+          </div>
+        </div>
+        <div class="circleInfoSection">
+          <div class="songInfo" id="songInfo">
+            <span class="song">Loading song...</span>
+            <span class="artist">Loading Artist</span>
+          </div>
+          <div id="timeStamps">
+            <span id="currentTime">0:00</span>
+            <span id="totalTime">0:00</span>
+          </div>
+          <div class="circleControls">
+            <div id="prevButton">
+              <svg viewBox="0 0 24 24">
+                <path fill="currentColor" d="M11 12L24 3v18zM0 3h4v18H0z" />
+              </svg>
+            </div>
+            <div id="nextButton">
+              <svg viewBox="0 0 24 24">
+                <path fill="currentColor" d="M13 12L0 3v18zM24 3h-4v18h4z" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Circular Player Style 3 (Square Modern) -->
+  <div id="widgetContainer" class="circular3">
+    <div class="squarePlayerContainer">
+      <div class="squareAlbumWrap">
+        <img id="albumArt" src="" alt="Album Art" />
+        <div class="progressBar">
+          <div id="progressFill"></div>
+        </div>
+        <div id="playPauseButton" class="squarePlayButton">
+          <svg id="playPauseIcon" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+          </svg>
+        </div>
+      </div>
+      <div class="squareInfoSection">
+        <div class="songInfo" id="songInfo">
+          <span class="song">Loading song...</span>
+          <span class="artist">Loading Artist</span>
+        </div>
+        <div id="timeStamps">
+          <span id="currentTime">0:00</span>
+          <span id="totalTime">0:00</span>
+        </div>
+        <div class="squareControls">
+          <div id="prevButton">
+            <svg viewBox="0 0 24 24">
+              <path fill="currentColor" d="M11 12L24 3v18zM0 3h4v18H0z" />
+            </svg>
+          </div>
+          <div id="nextButton">
+            <svg viewBox="0 0 24 24">
+              <path fill="currentColor" d="M13 12L0 3v18zM24 3h-4v18h4z" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Circular Player Style 4 (Glassmorphism) -->
+  <div id="widgetContainer" class="circular4">
+    <div class="glassPlayerContainer">
+      <div class="glassCircleWrap">
+        <div class="glassBg"></div>
+        <img id="albumArt" src="" alt="Album Art" />
+        <div class="progressRing">
+          <svg viewBox="0 0 100 100">
+            <circle class="progressBg" cx="50" cy="50" r="45" />
+            <circle id="progressCircle" class="progressFg" cx="50" cy="50" r="45" />
+          </svg>
+        </div>
+        <div id="playPauseButton" class="glassPlayButton">
+          <svg id="playPauseIcon" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+          </svg>
+        </div>
+      </div>
+      <div class="glassInfoSection">
+        <div class="songInfo" id="songInfo">
+          <span class="song">Loading song...</span>
+          <span class="artist">Loading Artist</span>
+        </div>
+        <div id="timeStamps">
+          <span id="currentTime">0:00</span>
+          <span id="totalTime">0:00</span>
+        </div>
+        <div class="glassControls">
+          <div id="prevButton">
+            <svg viewBox="0 0 24 24">
+              <path fill="currentColor" d="M11 12L24 3v18zM0 3h4v18H0z" />
+            </svg>
+          </div>
+          <div id="nextButton">
+            <svg viewBox="0 0 24 24">
+              <path fill="currentColor" d="M13 12L0 3v18zM24 3h-4v18h4z" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Circular Player Style 5 (Classic with Gradient) -->
+  <div id="widgetContainer" class="circular5">
+    <div class="dynamicGradientBg"></div>
+    <div class="circlePlayerContainer">
+      <div class="circleAlbumWrap">
+        <img id="albumArt" src="" alt="Album Art" />
+        <div class="progressRing">
+          <svg viewBox="0 0 100 100">
+            <circle class="progressBg" cx="50" cy="50" r="45" />
+            <circle id="progressCircle" class="progressFg" cx="50" cy="50" r="45" />
+          </svg>
+        </div>
+        <div id="playPauseButton" class="circlePlayButton">
+          <svg id="playPauseIcon" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+          </svg>
+        </div>
+      </div>
+      <div class="circleInfoSection">
+        <div class="songInfo" id="songInfo">
+          <span class="song">Loading song...</span>
+          <span class="artist">Loading Artist</span>
+        </div>
+        <div id="timeStamps">
+          <span id="currentTime">0:00</span>
+          <span id="totalTime">0:00</span>
+        </div>
+        <div class="circleControls">
+          <div id="prevButton">
+            <svg viewBox="0 0 24 24">
+              <path fill="currentColor" d="M11 12L24 3v18zM0 3h4v18H0z" />
+            </svg>
+          </div>
+          <div id="nextButton">
+            <svg viewBox="0 0 24 24">
+              <path fill="currentColor" d="M13 12L0 3v18zM24 3h-4v18h4z" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Circular Player Style 6 (Modern Square with Gradient) -->
+  <div id="widgetContainer" class="circular6">
+    <div class="dynamicGradientBg"></div>
+    <div class="squarePlayerContainer">
+      <div class="squareAlbumWrap">
+        <img id="albumArt" src="" alt="Album Art" />
+        <div class="progressBar">
+          <div id="progressFill"></div>
+        </div>
+        <div id="playPauseButton" class="squarePlayButton">
+          <svg id="playPauseIcon" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+          </svg>
+        </div>
+      </div>
+      <div class="squareInfoSection">
+        <div class="songInfo" id="songInfo">
+          <span class="song">Loading song...</span>
+          <span class="artist">Loading Artist</span>
+        </div>
+        <div id="timeStamps">
+          <span id="currentTime">0:00</span>
+          <span id="totalTime">0:00</span>
+        </div>
+        <div class="squareControls">
+          <div id="prevButton">
+            <svg viewBox="0 0 24 24">
+              <path fill="currentColor" d="M11 12L24 3v18zM0 3h4v18H0z" />
+            </svg>
+          </div>
+          <div id="nextButton">
+            <svg viewBox="0 0 24 24">
+              <path fill="currentColor" d="M13 12L0 3v18zM24 3h-4v18h4z" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden canvas for image color extraction -->
+  <canvas id="colorExtractor" width="50" height="50" style="display: none;"></canvas>
+</body>
+</html>
+
+
+CSS:
+
+/* Common Styles for All Players */
+#widgetContainer {
+  box-sizing: border-box;
+  overflow: hidden;
+  display: none; /* All hidden by default; JS will show the selected one */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== STYLE 1: ORIGINAL CIRCULAR (ENHANCED) ===== */
+#widgetContainer.circular1 {
+  display: block; /* Show when selected */
+  max-width: 25rem; /* 400px */
+  width: 100%;
+  padding: 1.5rem;
+  background: linear-gradient(145deg, #ffffff, #f0f0f0);
+  border-radius: 1.5rem;
+  box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
+  font-family: 'Montserrat', sans-serif;
+  color: #333;
+}
+
+.circular1 .circlePlayerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.circular1 .circleAlbumWrap {
+  position: relative;
+  width: 12rem;
+  height: 12rem;
+  transition: transform 0.3s ease;
+}
+
+.circular1 .circleAlbumWrap:hover {
+  transform: scale(1.02);
+}
+
+.circular1 #albumArt {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  object-fit: cover;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+.circular1 .progressRing {
+  position: absolute;
+  width: 12rem;
+  height: 12rem;
+  top: 0;
+  left: 0;
+}
+
+.circular1 .progressBg {
+  fill: none;
+  stroke: #efefef;
+  stroke-width: 4;
+}
+
+.circular1 .progressFg {
+  fill: none;
+  stroke: #5000ca;
+  stroke-width: 4;
+  stroke-linecap: round;
+  transform-origin: center;
+  transform: rotate(-90deg);
+  stroke-dasharray: 283;
+  stroke-dashoffset: 283; /* Updated by JS */
+}
+
+.circular1 .circlePlayButton {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: #5000ca;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  box-shadow: 0 4px 10px rgba(80, 0, 202, 0.3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.circular1 .circlePlayButton:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 15px rgba(80, 0, 202, 0.4);
+}
+
+.circular1 #playPauseIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: white;
+}
+
+.circular1 .circleInfoSection {
+  width: 100%;
+  text-align: center;
+}
+
+.circular1 .songInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.circular1 .song {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.circular1 .artist {
+  font-size: 0.875rem;
+  color: #666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.circular1 #timeStamps {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 0.75rem;
+  color: #888;
+  margin-bottom: 1rem;
+}
+
+.circular1 .circleControls {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.circular1 #prevButton svg,
+.circular1 #nextButton svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.circular1 #prevButton:hover svg,
+.circular1 #nextButton:hover svg {
+  transform: scale(1.2);
+  color: #5000ca;
+}
+
+/* ===== STYLE 2: COMPACT VERSION ===== */
+#widgetContainer.circular2 {
+  display: block;
+  max-width: 25rem;
+  width: 100%;
+  padding: 1.25rem;
+  background: linear-gradient(135deg, #2b2b2b, #1a1a1a);
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+}
+
+.circular2 .circlePlayerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.circular2 .compactLayout {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 1.25rem;
+}
+
+.circular2 .circleAlbumWrap {
+  position: relative;
+  width: 8rem;
+  height: 8rem;
+  flex-shrink: 0;
+}
+
+.circular2 #albumArt {
+  width: 6.5rem;
+  height: 6.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+.circular2 .progressRing {
+  position: absolute;
+  width: 8rem;
+  height: 8rem;
+  top: 0;
+  left: 0;
+}
+
+.circular2 .progressBg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.1);
+  stroke-width: 3;
+}
+
+.circular2 .progressFg {
+  fill: none;
+  stroke: #00e676;
+  stroke-width: 3;
+  stroke-linecap: round;
+  transform-origin: center;
+  transform: rotate(-90deg);
+  stroke-dasharray: 283;
+  stroke-dashoffset: 283;
+}
+
+.circular2 .circlePlayButton {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: #00e676;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  box-shadow: 0 4px 10px rgba(0, 230, 118, 0.4);
+  cursor: pointer;
+}
+
+.circular2 #playPauseIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #111;
+}
+
+.circular2 .circleInfoSection {
+  flex-grow: 1;
+  text-align: left;
+}
+
+.circular2 .songInfo {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+}
+
+.circular2 .song {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.circular2 .artist {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.circular2 #timeStamps {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 0.75rem;
+}
+
+.circular2 .circleControls {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.circular2 #prevButton svg,
+.circular2 #nextButton svg {
+  width: 1rem;
+  height: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.circular2 #prevButton:hover svg,
+.circular2 #nextButton:hover svg {
+  color: #00e676;
+}
+
+/* ===== STYLE 3: SQUARE MODERN ===== */
+#widgetContainer.circular3 {
+  display: block;
+  max-width: 25rem;
+  width: 100%;
+  padding: 0;
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.05);
+  font-family: 'Fredoka', sans-serif;
+  color: #222;
+  overflow: hidden;
+}
+
+.circular3 .squarePlayerContainer {
+  width: 100%;
+}
+
+.circular3 .squareAlbumWrap {
+  position: relative;
+  width: 100%;
+  padding-top: 75%; /* Aspect ratio for album art */
+  overflow: hidden;
+}
+
+.circular3 #albumArt {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  transition: transform 0.4s ease;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+.circular3 #albumArt:hover {
+  transform: scale(1.05);
+}
+
+.circular3 .progressBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0.25rem;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 2;
+}
+
+.circular3 #progressFill {
+  height: 100%;
+  background: #ff5722;
+  width: 0%; /* Will be updated by JS */
+  transition: width 0.1s linear;
+}
+
+.circular3 .squarePlayButton {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  background: #fff;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.circular3 .squarePlayButton:hover {
+  transform: translateY(-3px);
+}
+
+.circular3 #playPauseIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #222;
+}
+
+.circular3 .squareInfoSection {
+  padding: 1.25rem;
+}
+
+.circular3 .songInfo {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.75rem;
+}
+
+.circular3 .song {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.circular3 .artist {
+  font-size: 0.9rem;
+  color: #777;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.circular3 #timeStamps {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 0.8rem;
+  color: #999;
+  margin-bottom: 1rem;
+}
+
+.circular3 .squareControls {
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+}
+
+.circular3 #prevButton svg,
+.circular3 #nextButton svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #444;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.circular3 #prevButton:hover svg,
+.circular3 #nextButton:hover svg {
+  color: #ff5722;
+  transform: scale(1.15);
+}
+
+/* ===== STYLE 4: GLASSMORPHISM ===== */
+#widgetContainer.circular4 {
+  display: block;
+  max-width: 25rem;
+  width: 100%;
+  padding: 1.5rem;
+  background: transparent;
+  font-family: 'Montserrat', sans-serif;
+  color: #fff;
+  overflow: hidden;
+}
+
+.circular4 .glassPlayerContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.circular4 .glassBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(100, 100, 255, 0.25), rgba(30, 30, 50, 0.15));
+  z-index: -1;
+}
+
+.circular4 .glassCircleWrap {
+  position: relative;
+  width: 12rem;
+  height: 12rem;
+}
+
+.circular4 #albumArt {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  object-fit: cover;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+.circular4 .progressRing {
+  position: absolute;
+  width: 12rem;
+  height: 12rem;
+  top: 0;
+  left: 0;
+}
+
+.circular4 .progressBg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.2);
+  stroke-width: 4;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.2));
+}
+
+.circular4 .progressFg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.9);
+  stroke-width: 4;
+  stroke-linecap: round;
+  transform-origin: center;
+  transform: rotate(-90deg);
+  stroke-dasharray: 283;
+  stroke-dashoffset: 283;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6));
+}
+
+.circular4 .glassPlayButton {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.circular4 .glassPlayButton:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.circular4 #playPauseIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: white;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+.circular4 .glassInfoSection {
+  width: 100%;
+  text-align: center;
+}
+
+.circular4 .songInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.circular4 .song {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.circular4 .artist {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.8);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.circular4 #timeStamps {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 1rem;
+}
+
+.circular4 .glassControls {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.circular4 #prevButton svg,
+.circular4 #nextButton svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: rgba(255, 255, 255, 0.9);
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.circular4 #prevButton:hover svg,
+.circular4 #nextButton:hover svg {
+  transform: scale(1.2);
+  color: #fff;
+  filter: drop-shadow(0 2px 5px rgba(255, 255, 255, 0.3));
+}
+
+/* ===== STYLE 5: CLASSIC WITH GRADIENT BACKGROUND ===== */
+#widgetContainer.circular5 {
+  display: block;
+  max-width: 25rem;
+  width: 100%;
+  padding: 1.5rem;
+  background: linear-gradient(145deg, #ffffff, #f0f0f0); /* Default gradient before album art loads */
+  border-radius: 1.5rem;
+  box-shadow: 20px 20px 60px rgba(0, 0, 0, 0.15), -20px -20px 60px rgba(255, 255, 255, 0.3);
+  font-family: 'Montserrat', sans-serif;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+
+.circular5 .dynamicGradientBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(145deg, rgba(120, 120, 120, 0.8), rgba(40, 40, 40, 0.9));
+  z-index: 0;
+  transition: background 0.8s ease;
+}
+
+.circular5 .circlePlayerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.circular5 .circleAlbumWrap {
+  position: relative;
+  width: 12rem;
+  height: 12rem;
+  transition: transform 0.3s ease;
+}
+
+.circular5 .circleAlbumWrap:hover {
+  transform: scale(1.02);
+}
+
+.circular5 #albumArt {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  object-fit: cover;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+.circular5 .progressRing {
+  position: absolute;
+  width: 12rem;
+  height: 12rem;
+  top: 0;
+  left: 0;
+}
+
+.circular5 .progressBg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.2);
+  stroke-width: 4;
+}
+
+.circular5 .progressFg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.9);
+  stroke-width: 4;
+  stroke-linecap: round;
+  transform-origin: center;
+  transform: rotate(-90deg);
+  stroke-dasharray: 283;
+  stroke-dashoffset: 283;
+}
+
+.circular5 .circlePlayButton {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.9);
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.circular5 .circlePlayButton:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+.circular5 #playPauseIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #333;
+}
+
+.circular5 .circleInfoSection {
+  width: 100%;
+  text-align: center;
+}
+
+.circular5 .songInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.circular5 .song {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.circular5 .artist {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.8);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.circular5 #timeStamps {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 1rem;
+}
+
+.circular5 .circleControls {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.circular5 #prevButton svg,
+.circular5 #nextButton svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: rgba(255, 255, 255, 0.9);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.circular5 #prevButton:hover svg,
+.circular5 #nextButton:hover svg {
+  transform: scale(1.2);
+  color: #fff;
+  filter: drop-shadow(0 1px 3px rgba(255, 255, 255, 0.5));
+}
+
+/* ===== STYLE 6: MODERN SQUARE WITH GRADIENT BACKGROUND ===== */
+#widgetContainer.circular6 {
+  display: block;
+  max-width: 25rem;
+  width: 100%;
+  padding: 0;
+  background: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+  font-family: 'Fredoka', sans-serif;
+  color: #fff;
+  overflow: hidden;
+  position: relative;
+}
+
+.circular6 .dynamicGradientBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(40, 40, 40, 0.9), rgba(20, 20, 20, 1));
+  z-index: 0;
+  transition: background 0.8s ease;
+}
+
+.circular6 .squarePlayerContainer {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.circular6 .squareAlbumWrap {
+  position: relative;
+  width: 100%;
+  padding-top: 75%;
+  overflow: hidden;
+}
+
+.circular6 #albumArt {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  transition: transform 0.4s ease;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  opacity: 0.85;
+}
+
+.circular6 #albumArt:hover {
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+.circular6 .progressBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0.25rem;
+  background: rgba(255, 255, 255, 0.2);
+  z-index: 2;
+}
+
+.circular6 #progressFill {
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  width: 0%;
+  transition: width 0.1s linear;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.circular6 .squarePlayButton {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.circular6 .squarePlayButton:hover {
+  transform: translateY(-3px);
+  background: #fff;
+}
+
+.circular6 #playPauseIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #222;
+}
+
+.circular6 .squareInfoSection {
+  padding: 1.25rem;
+}
+
+.circular6 .songInfo {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.75rem;
+}
+
+.circular6 .song {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.circular6 .artist {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.circular6 #timeStamps {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 1rem;
+}
+
+.circular6 .squareControls {
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+}
+
+.circular6 #prevButton svg,
+.circular6 #nextButton svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: rgba(255, 255, 255, 0.9);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.circular6 #prevButton:hover svg,
+.circular6 #nextButton:hover svg {
+  color: #fff;
+  transform: scale(1.15);
+  filter: drop-shadow(0 1px 3px rgba(255, 255, 255, 0.5));
+}
+
+/* Text scrolling animation */
+@keyframes pingPongScroll {
+  0%, 10% { transform: translateX(0); }
+  45%, 55% { transform: translateX(var(--scroll-distance)); }
+  90%, 100% { transform: translateX(0); }
+}
+
+.song.scrolling, .artist.scrolling {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  animation: pingPongScroll var(--scroll-duration) ease-in-out infinite;
+  padding-right: 20px; /* Add some padding at the end */
+  will-change: transform;
+}
+
+.scrolling.paused {
+  animation-play-state: paused;
+}
+
+/* Special adjustments for compact player */
+.circular2 .song.scrolling, 
+.circular2 .artist.scrolling {
+  margin-right: 10px; /* Add extra margin for text scrolling */
+  max-width: calc(100% - 10px); /* Ensure it doesn't overflow the container */
+  text-align: left;
+}
+
+
+JS:
+window.addEventListener("onWidgetLoad", function(obj) {
+  console.log("onWidgetLoad event fired:", obj);
+
+  const { fieldData } = obj.detail;
+  const userKey = fieldData.user_key || "";
+  // Ensure the classic player is the default
+  const widgetStyle = fieldData.widgetStyle || "circular1";
+
+  if (!userKey) {
+    console.error("User key not provided.");
+    return;
+  }
+
+  // Select the active container among those with id "widgetContainer" whose class matches the selected circular style.
+  const allContainers = document.querySelectorAll("#widgetContainer");
+  let activeContainer = null;
+  allContainers.forEach(container => {
+    if (container.classList.contains(widgetStyle)) {
+      container.style.display = "block";
+      activeContainer = container;
+    } else {
+      container.style.display = "none";
+    }
+  });
+
+  // If no matching container found, fall back to classic player
+  if (!activeContainer) {
+    console.log("Container for style " + widgetStyle + " not found, falling back to classic player.");
+    const classicContainer = document.querySelector("#widgetContainer.circular1");
+    if (classicContainer) {
+      classicContainer.style.display = "block";
+      activeContainer = classicContainer;
+    } else {
+      console.error("Classic container not found as fallback.");
+      return;
+    }
+  }
+
+  // Helper to query elements within the active container.
+  function qs(selector) {
+    return activeContainer.querySelector(selector);
+  }
+
+  // Helper: Convert milliseconds to mm:ss format.
+  function msToTime(ms) {
+    const minutes = Math.floor(ms / 60000);
+    const seconds = Math.floor((ms % 60000) / 1000);
+    return minutes + ":" + (seconds < 10 ? "0" + seconds : seconds);
+  }
+
+  // Set paused style: update container filter and swap play/pause icon.
+  function setPausedStyle(paused) {
+    // Apply style changes based on widget type
+    if (widgetStyle === "circular1") {
+      activeContainer.style.filter = paused ? "grayscale(80%) brightness(0.5)" : "";
+    } else if (widgetStyle === "circular2") {
+      activeContainer.style.filter = paused ? "grayscale(50%) brightness(0.7)" : "";
+    } else if (widgetStyle === "circular3") {
+      const albumArt = qs("#albumArt");
+      if (albumArt) {
+        albumArt.style.opacity = paused ? "0.7" : "1";
+      }
+    } else if (widgetStyle === "circular4") {
+      // For glass style, reduce opacity of container
+      const glassContainer = qs(".glassPlayerContainer");
+      if (glassContainer) {
+        glassContainer.style.opacity = paused ? "0.8" : "1";
+      }
+    }
+    
+    // Also update scrolling animation state
+    const scrollingElements = activeContainer.querySelectorAll('.scrolling');
+    scrollingElements.forEach(el => {
+      if (paused) {
+        el.classList.add('paused');
+      } else {
+        el.classList.remove('paused');
+      }
+    });
+    
+    const playPauseIconPathEl = qs("#playPauseIcon path");
+    if (!playPauseIconPathEl) return;
+    const playPath = "M8 5v14l11-7z"; // play icon
+    const pausePath = "M6 19h4V5H6v14zm8-14v14h4V5h-4z"; // pause icon
+    playPauseIconPathEl.setAttribute("d", paused ? playPath : pausePath);
+  }
+
+  // Update progress for different player styles
+  function updateProgress(progressFraction, isPlaying) {
+    if (widgetStyle === "circular1" || widgetStyle === "circular2" || widgetStyle === "circular4" || widgetStyle === "circular5") {
+      // For circular styles, update the circle progress
+      const progressCircleEl = qs("#progressCircle");
+      if (progressCircleEl) {
+        const dasharray = 283;
+        const offset = dasharray * (1 - progressFraction);
+        progressCircleEl.style.transition = isPlaying ? "stroke-dashoffset 5s linear" : "none";
+        progressCircleEl.style.strokeDashoffset = offset;
+      }
+    } else if (widgetStyle === "circular3" || widgetStyle === "circular6") {
+      // For square style, update the progress bar
+      const progressFill = qs("#progressFill");
+      if (progressFill) {
+        progressFill.style.transition = isPlaying ? "width 5s linear" : "none";
+        progressFill.style.width = `${progressFraction * 100}%`;
+      }
+    }
+  }
+
+  // Handle text overflow with ping-pong scrolling animation
+  function handleTextOverflow() {
+    const songEl = qs(".song");
+    const artistEl = qs(".artist");
+    
+    if (!songEl || !artistEl) return;
+    
+    // Get whether the player is currently paused
+    const isPaused = qs("#playPauseIcon path").getAttribute("d").includes("M8 5v14l11-7");
+    
+    applyScrollingIfNeeded(songEl, isPaused);
+    applyScrollingIfNeeded(artistEl, isPaused);
+  }
+
+  function applyScrollingIfNeeded(element, isPaused) {
+    // Reset styles temporarily to measure actual content width
+    const originalTransform = element.style.transform;
+    element.style.transform = 'translateX(0)';
+    
+    // Get parent container width - handle different layouts
+    let containerWidth;
+    
+    // Special handling for compact player (circular2)
+    if (widgetStyle === "circular2") {
+      // For compact player, we need to get the width differently
+      // Get the songInfo container first, which is within circleInfoSection
+      const infoSection = activeContainer.querySelector(".circleInfoSection");
+      containerWidth = infoSection ? infoSection.getBoundingClientRect().width : 0;
+      
+      // The compact layout has less space for text
+      // Subtract some padding to prevent overflow
+      containerWidth = Math.max(0, containerWidth - 15);
+    } else {
+      // For other players, get parent container width as before
+      containerWidth = element.parentElement.getBoundingClientRect().width;
+    }
+    
+    // Get the actual content width
+    element.style.whiteSpace = "nowrap";
+    element.style.position = "relative";
+    const contentWidth = element.scrollWidth;
+    
+    // Debug log
+    // console.log(`Widget: ${widgetStyle}, Element: ${element.className}, Container: ${containerWidth}px, Content: ${contentWidth}px`);
+    
+    if (contentWidth > containerWidth && containerWidth > 0) {
+      // Calculate the distance needed to show the full text
+      // We need a negative value to move it left
+      const scrollDistance = -1 * (contentWidth - containerWidth + 10); // Add a little extra padding
+      
+      // Calculate duration based on content length (longer = slower)
+      // Use a slightly longer base duration to ensure full text visibility
+      const textLength = element.textContent.length;
+      const duration = Math.max(6, Math.min(15, textLength * 0.3));
+      
+      // Apply scrolling class and properties
+      element.classList.add('scrolling');
+      if (isPaused) {
+        element.classList.add('paused');
+      } else {
+        element.classList.remove('paused');
+      }
+      
+      // Set CSS variables for the animation
+      element.style.setProperty('--scroll-distance', `${scrollDistance}px`);
+      element.style.setProperty('--scroll-duration', `${duration}s`);
+    } else {
+      // Text fits - remove scrolling
+      element.classList.remove('scrolling');
+      element.classList.remove('paused');
+      element.style.transform = originalTransform;
+      element.style.whiteSpace = "nowrap";
+      element.style.overflow = "hidden";
+      element.style.textOverflow = "ellipsis";
+    }
+  }
+
+  // Track current song state to avoid unnecessary DOM updates
+  let currentSongData = {
+    track: null,
+    artists: null,
+    isPlaying: false,
+    progress: 0,
+    duration: 0,
+    albumImageUrl: null
+  };
+  
+  // Function to extract colors from album art and create gradients
+  function updateGradientBackground(imageUrl) {
+    // Only process for gradient-based widgets
+    if (widgetStyle !== "circular5" && widgetStyle !== "circular6") return;
+    
+    if (!imageUrl) {
+      // Default gradient if no album art
+      const defaultGradient = widgetStyle === "circular5" 
+        ? "linear-gradient(145deg, #555555, #333333)"
+        : "linear-gradient(to bottom, #333333, #111111)";
+        
+      const gradientEl = qs(".dynamicGradientBg");
+      if (gradientEl) {
+        gradientEl.style.background = defaultGradient;
+      }
+      return;
+    }
+    
+    // Create a temporary image to load the album art
+    const img = new Image();
+    img.crossOrigin = "Anonymous";
+    
+    img.onload = function() {
+      // Get the canvas for color extraction
+      const canvas = document.getElementById('colorExtractor');
+      const ctx = canvas.getContext('2d');
+      
+      // Draw the image to the canvas, resizing to the canvas dimensions
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      
+      // Get the image data
+      let imageData;
+      try {
+        imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      } catch (e) {
+        console.error("Cannot extract colors from image:", e);
+        return;
+      }
+      
+      // Extract the dominant and secondary colors
+      const colors = extractDominantColors(imageData.data, 2);
+      
+      if (colors && colors.length >= 2) {
+        // Create gradient with extracted colors
+        let gradient;
+        
+        if (widgetStyle === "circular5") {
+          // For classic gradient player
+          gradient = `linear-gradient(145deg, ${colors[0]}, ${colors[1]})`;
+        } else {
+          // For modern square gradient player
+          gradient = `linear-gradient(to bottom, ${colors[0]}, ${colors[1]})`;
+        }
+        
+        // Apply the gradient
+        const gradientEl = qs(".dynamicGradientBg");
+        if (gradientEl) {
+          gradientEl.style.background = gradient;
+        }
+      }
+    };
+    
+    img.onerror = function() {
+      console.error("Failed to load image for color extraction");
+    };
+    
+    // Start loading the image
+    img.src = imageUrl;
+  }
+  
+  // Simple algorithm to extract dominant colors
+  function extractDominantColors(data, numColors) {
+    // Create color buckets (simplified approach)
+    const colorBuckets = {};
+    
+    // Sample pixels (skip every few pixels for performance)
+    for (let i = 0; i < data.length; i += 16) {
+      const r = data[i];
+      const g = data[i + 1];
+      const b = data[i + 2];
+      
+      // Skip very light colors (close to white) and very dark colors (close to black)
+      if ((r > 240 && g > 240 && b > 240) || (r < 15 && g < 15 && b < 15)) {
+        continue;
+      }
+      
+      // Simplify colors into buckets (reduce precision)
+      const bucketSize = 24; // Larger number = fewer buckets
+      const bucketR = Math.floor(r / bucketSize) * bucketSize;
+      const bucketG = Math.floor(g / bucketSize) * bucketSize;
+      const bucketB = Math.floor(b / bucketSize) * bucketSize;
+      
+      const colorKey = `rgb(${bucketR},${bucketG},${bucketB})`;
+      
+      if (!colorBuckets[colorKey]) {
+        colorBuckets[colorKey] = {
+          color: colorKey,
+          count: 1,
+          r: r,
+          g: g,
+          b: b
+        };
+      } else {
+        colorBuckets[colorKey].count++;
+        // Average the colors for more accuracy
+        colorBuckets[colorKey].r = (colorBuckets[colorKey].r + r) / 2;
+        colorBuckets[colorKey].g = (colorBuckets[colorKey].g + g) / 2;
+        colorBuckets[colorKey].b = (colorBuckets[colorKey].b + b) / 2;
+      }
+    }
+    
+    // Convert to array and sort by count
+    const sortedColors = Object.values(colorBuckets).sort((a, b) => b.count - a.count);
+    
+    // Get the top colors
+    const topColors = sortedColors.slice(0, numColors).map(bucket => 
+      `rgba(${Math.round(bucket.r)}, ${Math.round(bucket.g)}, ${Math.round(bucket.b)}, 0.9)`
+    );
+    
+    // If we couldn't find enough colors, add fallbacks
+    while (topColors.length < numColors) {
+      topColors.push(`rgba(80, 80, 100, 0.8)`);
+    }
+    
+    return topColors;
+  }
+
+  // Fetch currently playing track and update the UI based on widget style
+  function fetchCurrentlyPlaying() {
+    const url = "https://music-widget.onrender.com/currently-playing?userKey=" + userKey + "&t=" + new Date().getTime();
+    console.log("Fetching URL:", url);
+    fetch(url, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" }
+    })
+    .then(response => {
+      console.log("Response status:", response.status);
+      if (response.status === 204) return null;
+      return response.json();
+    })
+    .then(data => {
+      const albumArtEl = qs("#albumArt");
+      const currentTimeEl = qs("#currentTime");
+      const totalTimeEl = qs("#totalTime");
+      const songInfoEl = qs("#songInfo");
+      
+      if (!albumArtEl || !currentTimeEl || !totalTimeEl || !songInfoEl) {
+        console.error("Required DOM elements not found for player.");
+        return;
+      }
+      
+      if (!data || !data.track) {
+        // Only update DOM if state changed
+        if (currentSongData.track !== null) {
+          songInfoEl.innerHTML = '<span class="song">No song is playing</span><span class="artist">No Artist</span>';
+          albumArtEl.src = "";
+          currentSongData.track = null;
+          currentSongData.artists = null;
+          handleTextOverflow();
+        }
+        currentTimeEl.innerText = "0:00";
+        totalTimeEl.innerText = "0:00";
+        updateProgress(0, false);
+        setPausedStyle(true);
+        return;
+      }
+      
+      const trackName = data.track || "Unknown Title";
+      const artists = data.artists || "Unknown Artist";
+      
+      // Check if song or artist changed
+      const songChanged = trackName !== currentSongData.track;
+      const artistChanged = artists !== currentSongData.artists;
+      
+      // Only update the song/artist elements if they changed
+      if (songChanged || artistChanged) {
+        songInfoEl.innerHTML = '<span class="song">' + trackName + '</span><span class="artist">' + artists + '</span>';
+        
+        // Save the current state
+        currentSongData.track = trackName;
+        currentSongData.artists = artists;
+        
+        // Initialize scrolling for new content
+        setTimeout(handleTextOverflow, 50);
+      }
+      
+      // Update time and progress always (these don't affect animations)
+      currentTimeEl.innerText = msToTime(data.progress_ms);
+      totalTimeEl.innerText = msToTime(data.duration_ms);
+      
+      // Check if playing state changed
+      if (data.is_playing !== currentSongData.isPlaying) {
+        setPausedStyle(!data.is_playing);
+        currentSongData.isPlaying = data.is_playing;
+      }
+      
+      // Use high-quality album art if available
+      if (data.album_image_url && (!albumArtEl.src || !albumArtEl.src.includes(data.album_image_url) || data.album_image_url !== currentSongData.albumImageUrl)) {
+        // Try to get a higher resolution image by manipulating the URL if it's from Spotify
+        // Spotify image URLs often end with /image/{size}
+        let imageUrl = data.album_image_url;
+        if (imageUrl.includes("spotify.com")) {
+          // Replace any small size indicators with larger ones if possible
+          imageUrl = imageUrl.replace(/\/image\/[a-zA-Z0-9]+$/, "/image/640");
+        }
+        albumArtEl.src = imageUrl;
+        
+        // Update album art URL in state
+        currentSongData.albumImageUrl = data.album_image_url;
+        
+        // Update gradient background if style requires it
+        if (widgetStyle === "circular5" || widgetStyle === "circular6") {
+          updateGradientBackground(imageUrl);
+        }
+      } else if (!data.album_image_url) {
+        albumArtEl.src = "";
+        currentSongData.albumImageUrl = null;
+        
+        // Reset gradient if no album art
+        if (widgetStyle === "circular5" || widgetStyle === "circular6") {
+          updateGradientBackground(null);
+        }
+      }
+      
+      const progressFraction = data.progress_ms / data.duration_ms;
+      updateProgress(progressFraction, data.is_playing);
+      
+      // Store new values
+      currentSongData.progress = data.progress_ms;
+      currentSongData.duration = data.duration_ms;
+    })
+    .catch(error => {
+      console.error("Error fetching currently playing track:", error);
+      const songInfoEl = qs("#songInfo");
+      if (songInfoEl && currentSongData.track !== "Error") {
+        songInfoEl.innerHTML = '<span class="song">Error fetching song</span><span class="artist">Error</span>';
+        currentSongData.track = "Error";
+        currentSongData.artists = "Error";
+        setPausedStyle(true);
+        handleTextOverflow();
+      }
+    });
+  }
+
+  // Initial setup and data fetch
+  fetchCurrentlyPlaying();
+  setInterval(fetchCurrentlyPlaying, 2000);
+  window.addEventListener("resize", handleTextOverflow);
+});
+
+
+
+FIELDS:
+{
+  "user_key": {
+    "type": "text",
+    "label": "User Key",
+    "value": ""
+  },
+  "widgetStyle": {
+    "type": "dropdown",
+    "label": "Widget Style",
+    "value": "circular1",
+    "options": {
+      "circular1": "Classic Circular Player",
+      "circular2": "Compact Dark Player",
+      "circular3": "Modern Square Player",
+      "circular4": "Glass Effect Player",
+      "circular5": "Classic Gradient Player",
+      "circular6": "Modern Gradient Player"
+    }
+  }
+}
