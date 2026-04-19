@@ -1,0 +1,13 @@
+retail
+restaurant
+dental
+medical
+legal
+hospitality
+real estate
+auto dealer
+fitness
+ecommerce
+spa
+veterinary
+accounting

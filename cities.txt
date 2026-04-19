@@ -1,0 +1,20 @@
+New York, NY
+Los Angeles, CA
+Chicago, IL
+Houston, TX
+Philadelphia, PA
+Miami, FL
+San Francisco, CA
+Austin, TX
+Orlando, FL
+San Diego, CA
+Tampa, FL
+Dallas, TX
+Brooklyn, NY
+Jacksonville, FL
+Denver, CO
+Atlanta, GA
+Phoenix, AZ
+San Jose, CA
+Fort Lauderdale, FL
+Sacramento, CA

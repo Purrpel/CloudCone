@@ -1,0 +1,10 @@
+.env
+creds.json
+*.db
+/screenshots
+__pycache__/
+**/__pycache__/
+*.pyc
+.venv/
+venv/
+.DS_Store
