@@ -21,9 +21,30 @@ def _int(key: str, default: int) -> int:
 
 
 # ── LLM ──────────────────────────────────────────────────────────────────────
-LLM_PROVIDER: str = os.getenv("LLM_PROVIDER", "anthropic")
-CHEAP_MODEL: str = os.getenv("CHEAP_MODEL", "claude-haiku-4-5")
-PREMIUM_MODEL: str = os.getenv("PREMIUM_MODEL", "claude-opus-4-7")
+# Provider auto-detects from whichever API key is set. Explicit LLM_PROVIDER
+# env wins if present. If both keys are set, LLM_PROVIDER must pick one.
+def _detect_provider() -> str:
+    explicit = os.getenv("LLM_PROVIDER", "").lower().strip()
+    if explicit in ("anthropic", "openai"):
+        return explicit
+    if os.getenv("ANTHROPIC_API_KEY"):
+        return "anthropic"
+    if os.getenv("OPENAI_API_KEY"):
+        return "openai"
+    return "anthropic"  # harmless default; client will error on missing key
+
+
+LLM_PROVIDER: str = _detect_provider()
+
+_DEFAULT_MODELS: dict[str, tuple[str, str]] = {
+    "anthropic": ("claude-haiku-4-5", "claude-opus-4-7"),
+    "openai":    ("gpt-4o-mini",      "gpt-4-turbo"),
+}
+_cheap_default, _premium_default = _DEFAULT_MODELS.get(
+    LLM_PROVIDER, _DEFAULT_MODELS["anthropic"]
+)
+CHEAP_MODEL: str = os.getenv("CHEAP_MODEL") or _cheap_default
+PREMIUM_MODEL: str = os.getenv("PREMIUM_MODEL") or _premium_default
 MAX_RUN_COST_USD: float = _float("MAX_RUN_COST_USD", 5.00)
 
 # ── Pipeline behaviour ────────────────────────────────────────────────────────
