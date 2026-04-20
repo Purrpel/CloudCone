@@ -33,13 +33,36 @@ from ada_lead_gen.sinks.sheets import SheetsWriter, _extract_domain
 from ada_lead_gen.sources.google_places import find_businesses
 
 
+# Red flags that immediately disqualify a lead (from insights.py taxonomy).
+_DISQUALIFYING_FLAGS: frozenset[str] = frozenset({
+    "non_profit", "government", "education", "healthcare_portal",
+    "enterprise", "has_overlay", "competitor", "too_small",
+    # Legacy / generic fallback
+    "bad_fit",
+})
+
+
+def _is_disqualifying_flag(flag: str) -> bool:
+    """Match any known bad-fit reason, being lenient about LLM phrasing."""
+    low = flag.lower().strip().replace(" ", "_").replace("-", "_")
+    if low in _DISQUALIFYING_FLAGS:
+        return True
+    # Substring match for variations ("non_profit_organization", etc.)
+    return any(f in low for f in _DISQUALIFYING_FLAGS)
+
+
 def _qualifies(lead: dict[str, Any]) -> tuple[bool, str]:
     """
-    Apply hard qualification rules.
-    Returns (qualifies, reason).
+    Apply hard qualification rules BEFORE running insights.
+    Red-flag checks happen separately after insights run.
     """
     if not lead.get("alive"):
         return False, "not_alive"
+
+    # Hard overlay disqualification — if the scanner already detected one,
+    # skip everything. These prospects have already bought a competing tool.
+    if lead.get("overlay_detected"):
+        return False, f"overlay_detected:{lead['overlay_detected']}"
 
     critical = lead.get("critical", 0)
     serious = lead.get("serious", 0)
@@ -59,9 +82,6 @@ def _qualifies(lead: dict[str, Any]) -> tuple[bool, str]:
 
     if lead.get("lead_score", 0) < config.MIN_LEAD_SCORE:
         return False, f"score_too_low({lead.get('lead_score')})"
-
-    if "bad_fit" in lead.get("red_flags", []):
-        return False, "red_flag_bad_fit"
 
     return True, "ok"
 
@@ -121,11 +141,22 @@ async def _process_one(
         "total_violations": a11y.total,
         "violations": [dataclasses.asdict(v) for v in a11y.violations],
         "screenshot_path": a11y.screenshot_path,
+        "overlay_detected": a11y.overlay_detected,
+        "site_content": a11y.content.as_prompt_block(),
         "emails": [dataclasses.asdict(e) for e in clean_emails],
         "phones": [dataclasses.asdict(p) for p in contacts_result.phones],
         "scanned_at": datetime.utcnow().isoformat(),
         "red_flags": [],
     }
+
+    # Early exit: overlay-widget disqualification happens BEFORE any LLM spend.
+    if a11y.overlay_detected:
+        logger.info(
+            "Skipping {} — already has {} overlay widget",
+            domain, a11y.overlay_detected,
+        )
+        mark_scanned(domain, qualified=False)
+        return None
 
     # 4. Classify
     try:
@@ -179,9 +210,10 @@ async def _process_one(
         insights = generate_insights(lead, llm)
         lead["insights"] = dataclasses.asdict(insights)
         lead["red_flags"] = insights.red_flags
-        # Re-check bad_fit after insights
-        if "bad_fit" in insights.red_flags:
-            logger.info("Bad fit after insights: {}", domain)
+        # Re-check bad-fit after insights — any disqualifying flag bumps it
+        bad_flags = [f for f in insights.red_flags if _is_disqualifying_flag(f)]
+        if bad_flags:
+            logger.info("Bad fit after insights: {} | flags={}", domain, bad_flags)
             mark_scanned(domain, qualified=False)
             return None
     except Exception as exc:
@@ -231,24 +263,48 @@ async def run_pipeline(
     tasks = [_process_one(biz, llm, semaphore, stats) for biz in businesses]
     results = await asyncio.gather(*tasks, return_exceptions=True)
 
+    # Surface any silently-swallowed task exceptions so we can see real bugs
+    for biz, r in zip(businesses, results):
+        if isinstance(r, Exception):
+            logger.error(
+                "Task failed for {}: {}: {}",
+                biz.website, type(r).__name__, r,
+            )
+
     qualified_leads = [r for r in results if isinstance(r, dict)]
 
-    # Write to Sheets
+    # Write to Sheets — isolate failures per lead so one bad row doesn't
+    # stop the rest
     if qualified_leads:
         try:
             writer = SheetsWriter()
-            for lead in qualified_leads:
-                domain = _extract_domain(lead.get("final_url") or lead.get("website", ""))
-                writer.write_lead(lead)
-                insights_data = lead.get("insights", {})
-                vsummary_data = lead.get("violations_summary", {})
-                writer.write_insights(domain, insights_data, vsummary_data)
-                best = lead.get("best_contact", {})
-                best_email = best.get("contact", "") if best and best.get("type") == "email" else ""
-                writer.write_draft_placeholder(domain, best_email)
-                stats["written"] += 1
         except Exception as exc:
-            logger.error("Sheets write failed: {}", exc)
+            logger.error("Sheets connection failed: {}", exc)
+        else:
+            for lead in qualified_leads:
+                try:
+                    domain = _extract_domain(
+                        lead.get("final_url") or lead.get("website", "")
+                    )
+                    writer.write_lead(lead)
+                    writer.write_insights(
+                        domain,
+                        lead.get("insights", {}),
+                        lead.get("violations_summary", {}),
+                    )
+                    best = lead.get("best_contact", {})
+                    best_email = (
+                        best.get("contact", "")
+                        if best and best.get("type") == "email"
+                        else ""
+                    )
+                    writer.write_draft_placeholder(domain, best_email)
+                    stats["written"] += 1
+                except Exception as exc:
+                    logger.error(
+                        "Sheets write failed for {}: {}",
+                        lead.get("name"), exc,
+                    )
 
     total_cost = llm.get_run_spend()
     avg_cost = total_cost / max(stats["qualified"], 1)

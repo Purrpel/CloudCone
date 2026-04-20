@@ -55,38 +55,67 @@ def _get_or_create_sheet(spreadsheet: gspread.Spreadsheet, title: str, headers: 
     return ws
 
 
-def _domain_index(ws: gspread.Worksheet) -> dict[str, int]:
-    """Return {domain: row_number} for existing rows (1-indexed)."""
+def _build_domain_index(ws: gspread.Worksheet) -> dict[str, int]:
+    """Return {domain: row_number} for existing rows (1-indexed, single fetch)."""
     records = ws.get_all_values()
     if len(records) <= 1:
         return {}
     index: dict[str, int] = {}
     for i, row in enumerate(records[1:], start=2):
-        if row:
-            index[row[0].lower()] = i
+        if row and row[0]:
+            index[row[0].strip().lower()] = i
     return index
 
 
 class SheetsWriter:
-    """Idempotent writer for all three Google Sheets tabs."""
+    """Idempotent writer for all three Google Sheets tabs.
+
+    Each tab's domain→row index is cached once on construction and updated
+    in-memory as rows are written, avoiding N full-sheet reads per run.
+    """
 
     def __init__(self) -> None:
+        if not config.GOOGLE_SHEETS_ID:
+            raise ValueError("GOOGLE_SHEETS_ID is not set in env")
+
         client = _get_client()
         self._spreadsheet = client.open_by_key(config.GOOGLE_SHEETS_ID)
         self._leads_ws = _get_or_create_sheet(self._spreadsheet, "Leads", _LEADS_HEADERS)
         self._insights_ws = _get_or_create_sheet(self._spreadsheet, "AI Insights", _INSIGHTS_HEADERS)
         self._drafts_ws = _get_or_create_sheet(self._spreadsheet, "Outreach Drafts", _DRAFTS_HEADERS)
+
+        # Build indexes once — in-memory updates keep them fresh
+        self._leads_idx = _build_domain_index(self._leads_ws)
+        self._insights_idx = _build_domain_index(self._insights_ws)
+        self._drafts_idx = _build_domain_index(self._drafts_ws)
+
         logger.info("SheetsWriter connected to spreadsheet {}", config.GOOGLE_SHEETS_ID)
 
-    def _upsert_row(self, ws: gspread.Worksheet, domain: str, row: list[str]) -> None:
+    def _upsert_row(
+        self,
+        ws: gspread.Worksheet,
+        idx: dict[str, int],
+        domain: str,
+        row: list[str],
+        num_cols: int,
+    ) -> None:
         """Insert new row or update existing one, keyed on domain (col A)."""
-        idx = _domain_index(ws)
-        if domain.lower() in idx:
-            row_num = idx[domain.lower()]
-            ws.update(f"A{row_num}", [row])
+        key = domain.lower()
+        if key in idx:
+            row_num = idx[key]
+            end_col = _col_letter(num_cols)
+            # gspread v6 API: positional values first, then range_name
+            ws.update(
+                values=[row],
+                range_name=f"A{row_num}:{end_col}{row_num}",
+                value_input_option="RAW",
+            )
             logger.debug("Updated row {} for {}", row_num, domain)
         else:
             ws.append_row(row, value_input_option="RAW")
+            # Track the new row number in the in-memory index
+            # append_row always adds at the bottom — we infer position
+            idx[key] = len(idx) + 2  # +2 because 1=header, and indexes are 1-based
             logger.debug("Appended new row for {}", domain)
 
     def write_lead(self, lead: dict[str, Any]) -> None:
@@ -125,7 +154,7 @@ class SheetsWriter:
             lead.get("tier", ""),
             lead.get("scanned_at", datetime.utcnow().isoformat()),
         ]
-        self._upsert_row(self._leads_ws, domain, row)
+        self._upsert_row(self._leads_ws, self._leads_idx, domain, row, len(_LEADS_HEADERS))
 
     def write_insights(self, domain: str, insights: dict[str, Any], summary: dict[str, Any]) -> None:
         """Write or update an AI Insights row."""
@@ -145,12 +174,11 @@ class SheetsWriter:
             summary.get("tone_hook", ""),
             insights.get("generated_at", datetime.utcnow().isoformat()),
         ]
-        self._upsert_row(self._insights_ws, domain, row)
+        self._upsert_row(self._insights_ws, self._insights_idx, domain, row, len(_INSIGHTS_HEADERS))
 
     def write_draft_placeholder(self, domain: str, best_email: str) -> None:
         """Create an empty Outreach Drafts row for manual completion."""
-        idx = _domain_index(self._drafts_ws)
-        if domain.lower() in idx:
+        if domain.lower() in self._drafts_idx:
             return  # already exists, don't overwrite
         row = [
             domain,
@@ -164,7 +192,17 @@ class SheetsWriter:
             "",  # Notes
         ]
         self._drafts_ws.append_row(row, value_input_option="RAW")
+        self._drafts_idx[domain.lower()] = len(self._drafts_idx) + 2
         logger.debug("Created draft placeholder for {}", domain)
+
+
+def _col_letter(n: int) -> str:
+    """Convert 1-indexed column number to A1 letter (1→A, 26→Z, 27→AA)."""
+    result = ""
+    while n > 0:
+        n, r = divmod(n - 1, 26)
+        result = chr(65 + r) + result
+    return result
 
 
 def _extract_domain(url: str) -> str:

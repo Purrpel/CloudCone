@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import time
 from dataclasses import dataclass, field
 from typing import Any
 
@@ -27,9 +28,15 @@ class Business:
     industry: str = ""
 
 
-def _cache_key(city: str, industry: str, page: int) -> str:
-    raw = f"{city}|{industry}|{page}"
+def _page_key(city: str, industry: str, page: int) -> str:
+    """Deterministic cache key for a Text Search page."""
+    raw = f"search|{city.lower()}|{industry.lower()}|p{page}"
     return hashlib.md5(raw.encode()).hexdigest()
+
+
+def _detail_key(place_id: str) -> str:
+    """Deterministic cache key for Place Details (not tied to city/industry)."""
+    return "detail:" + hashlib.md5(place_id.encode()).hexdigest()
 
 
 def _extract_business(place: dict[str, Any], city: str, industry: str) -> Business | None:
@@ -68,21 +75,30 @@ def find_businesses(city: str, industry: str, limit: int = 60) -> list[Business]
     page = 0
 
     while len(businesses) < limit:
-        ck = _cache_key(city, industry, page)
-        cached = get_cached_places(ck, config.PLACES_CACHE_DAYS)
+        page_ck = _page_key(city, industry, page)
+        cached_page = get_cached_places(page_ck, config.PLACES_CACHE_DAYS)
 
-        if cached is not None:
+        if cached_page is not None:
             logger.debug("Places cache hit: {} page {}", query, page)
-            results = cached
+            # Stored format: [{"results": [...], "next_page_token": "..."}]
+            entry = cached_page[0] if cached_page else {}
+            results = entry.get("results", [])
+            page_token = entry.get("next_page_token") or None
         else:
             logger.info("Places API call: '{}' page {}", query, page)
             kwargs: dict[str, Any] = {"query": query}
             if page_token:
+                # Google requires ~2s between page requests
+                time.sleep(2.1)
                 kwargs["page_token"] = page_token
-            resp = client.places(**kwargs)
+            try:
+                resp = client.places(**kwargs)
+            except Exception as exc:
+                logger.warning("Places Text Search failed: {}", exc)
+                break
             results = resp.get("results", [])
-            set_cached_places(ck, results)
-            page_token = resp.get("next_page_token")
+            page_token = resp.get("next_page_token") or None
+            set_cached_places(page_ck, [{"results": results, "next_page_token": page_token}])
 
         for place in results:
             if len(businesses) >= limit:
@@ -91,7 +107,7 @@ def find_businesses(city: str, industry: str, limit: int = 60) -> list[Business]
             if not place_id:
                 continue
 
-            detail_ck = _cache_key(city, industry, int(place_id.__hash__() & 0xFFFFFF))
+            detail_ck = _detail_key(place_id)
             cached_detail = get_cached_places(detail_ck, config.PLACES_CACHE_DAYS)
 
             if cached_detail:
@@ -116,7 +132,7 @@ def find_businesses(city: str, industry: str, limit: int = 60) -> list[Business]
             if biz:
                 businesses.append(biz)
 
-        if not page_token or cached is not None:
+        if not page_token:
             break
         page += 1
 
